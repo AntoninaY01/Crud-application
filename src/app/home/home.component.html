@@ -1,3 +1,38 @@
-<p>home works!</p>
 <router-outlet></router-outlet>
+<div class="table-wrapper h-full w-full">
+  <div class="flex justify-content-center p-8">
+    <p-table
+      [columns]="cols"
+      [value]="usersList"
+      [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          Manage Users
+          <p-button label="Add new User" icon="pi pi-user-plus" (click)="createUser()"></p-button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th>
+            Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+          <td>
+            <button type="button" pButton pRipple icon="pi pi-eye" class="mr-2"></button>
+            <button type="button" pButton pRipple icon="pi pi-pencil"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
 
