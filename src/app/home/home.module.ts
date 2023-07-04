@@ -12,7 +12,7 @@ import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [HomeComponent, CreateUserComponent],
-  imports: [RouterModule.forChild([HOME_ROUTES]), TableModule, CommonModule, ButtonModule, RippleModule, ReactiveFormsModule, InputTextModule],
+  imports: [RouterModule.forChild(HOME_ROUTES), TableModule, CommonModule, ButtonModule, RippleModule, ReactiveFormsModule, InputTextModule],
   providers: [],
 })
 export class HomeModule {
