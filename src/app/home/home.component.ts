@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from "./model";
 import { Router } from "@angular/router";
-import { UserDataService } from "./user-data.service";
 import { UserActionsService } from "./user-actions.service";
 
 @Component({
@@ -13,11 +12,10 @@ export class HomeComponent implements OnInit {
   usersList: UserDTO[] = [];
   cols!: { field: string, header: string }[];
 
-  constructor(private router: Router, private userDataService: UserDataService, private userActionsService: UserActionsService) {
+  constructor(private router: Router, private userActionsService: UserActionsService) {
   }
 
   ngOnInit() {
-    this.getUserDataFromService()
     this.onUserCreated()
     this.cols = [
       {field: 'firstName', header: 'First Name'},
@@ -27,19 +25,11 @@ export class HomeComponent implements OnInit {
       {field: 'city', header: 'City'},
       {field: 'address', header: 'Address'},
     ]
-    console.log(this.usersList)
+    // console.log(this.usersList)
   }
 
   createUser(): void {
     this.router.navigate(['home', 'create-user']);
-  }
-
-  getUserDataFromService(): void {
-    this.userDataService.newUser$.subscribe((newUser: UserDTO | null) => {
-      if (newUser) {
-        this.usersList.push(newUser);
-      }
-    });
   }
 
   onUserCreated(): void {

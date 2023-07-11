@@ -8,11 +8,11 @@ export class UserActionsService {
   createNewUser(newUser: UserDTO): void {
     const existingUsers = this.getUsersFromLocalStorage();
 
-    let updatedUsers: UserDTO[];
-    if (Array.isArray(existingUsers)) {
+    let updatedUsers: UserDTO[] = [];
+    if (existingUsers) {
       updatedUsers = existingUsers.concat(newUser); // Concatenate the new user to the existing user data
     } else {
-      updatedUsers = [newUser]; // Create a new array with the new user
+      updatedUsers.push(newUser); // Create a new array with the new user
     }
     localStorage.setItem("userData", JSON.stringify(updatedUsers));
   }
@@ -20,6 +20,10 @@ export class UserActionsService {
   getUsersFromLocalStorage(): UserDTO[] | null {
     const storedUsers = localStorage.getItem("userData");
     return storedUsers ? JSON.parse(storedUsers) : null;
+  }
+
+  deleteUser(): void {
+
   }
 
 }

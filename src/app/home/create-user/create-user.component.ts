@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, UntypedFormGroup} from "@angular/forms";
-import {UserActionsService} from "../user-actions.service";
-import {UserDataService} from "../user-data.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, UntypedFormGroup } from "@angular/forms";
+import { UserActionsService } from "../user-actions.service";
+import { Router } from "@angular/router";
+import { UserDTO } from '../model';
 
 @Component({
   selector: 'app-create-user',
@@ -11,11 +11,11 @@ import {Router} from "@angular/router";
 })
 export class CreateUserComponent implements OnInit {
   form!: UntypedFormGroup;
+  newUser!: UserDTO;
 
   constructor(private fb: FormBuilder,
-              private userActionService: UserActionsService,
-              private userDataService: UserDataService,
-              private router: Router) {
+    private userActionService: UserActionsService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -34,15 +34,23 @@ export class CreateUserComponent implements OnInit {
   }
 
   createAndStoreNewUser(form: any): void {
-    this.userActionService.createNewUser(this.form.value);
-    this.setUserDataInService();
+    this.generateNewUserId();
+    const user = this.form.value;
+    user.id = this.generateNewUserId();
+    this.userActionService.createNewUser(user);
     this.goBack();
+    console.log(user);
+    
   }
 
-  setUserDataInService(): void {
-    this.userDataService.setNewUser(this.form.value);
+  generateNewUserId(): number {
+    debugger
+    const existingUsers = this.userActionService.getUsersFromLocalStorage();
+    if (existingUsers !== null) {
+      return existingUsers.length + 1;
+    }
+    return 1;
   }
-
 
   goBack(): void {
     this.router.navigate(['home']);
