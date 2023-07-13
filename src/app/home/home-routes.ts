@@ -1,4 +1,4 @@
-import {Route, Routes} from "@angular/router";
+import {Routes} from "@angular/router";
 import {CreateUserComponent} from "./create-user/create-user.component";
 import {HomeComponent} from "./home.component";
 import {UpdateUserComponent} from "./update-user/update-user.component";
@@ -13,10 +13,10 @@ export const HOME_ROUTES: Routes = [{
     component: CreateUserComponent
   },
   {
-    path: 'update-user',
+    path: 'update-user/:id',
     component: UpdateUserComponent
   },
   {
-    path: 'view-user',
+    path: 'view-user/:id',
     component: ViewUserComponent
   }]

@@ -39,4 +39,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  onViewUser(id: number): void {
+    this.router.navigate(['home/view-user', id])
+  }
+
 }

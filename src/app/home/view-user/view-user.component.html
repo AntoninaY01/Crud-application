@@ -1,1 +1,61 @@
-<p>view-user works!</p>
+<div class="form-wrapper flex justify-content-center p-5">
+  <form [formGroup]="form">
+    <div class="grid formgrid">
+      <div class="p-fluid col-12">
+        <div class="field">
+          <label for="firstname">Firstname</label>
+          <input id="firstname"
+                 pInputText
+                 formControlName="firstName"
+                 readonly="firstName">
+        </div>
+        <div class="field">
+          <label for="lastname">Lastname</label>
+          <input
+            id="lastname"
+            pInputText
+            formControlName="lastName"
+            readonly="lastName">
+        </div>
+
+        <div class="field">
+          <label for="currentPosition">Current Position</label>
+          <input
+            id="currentPosition"
+            pInputText
+            formControlName="currentPosition"
+            readonly="currentPosition">
+        </div>
+        <div class="field">
+          <label for="age">Age</label>
+          <input
+            id="age"
+            pInputText
+            formControlName="age"
+            readonly="age">
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input
+            id="city"
+            pInputText
+            formControlName="city"
+            readonly="city">
+        </div>
+        <div class="field">
+          <label for="address">Address</label>
+          <input
+            id="address"
+            pInputText
+            formControlName="address"
+            readonly="address">
+        </div>
+        <div class="justify-content-between flex">
+          <p-button class="p-button-danger flex justify-content-end" (click)="goBack()">Back</p-button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</div>

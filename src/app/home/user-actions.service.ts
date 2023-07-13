@@ -9,6 +9,7 @@ export class UserActionsService {
     const existingUsers = this.getUsersFromLocalStorage();
 
     let updatedUsers: UserDTO[] = [];
+
     if (existingUsers) {
       updatedUsers = existingUsers.concat(newUser); // Concatenate the new user to the existing user data
     } else {
@@ -20,6 +21,13 @@ export class UserActionsService {
   getUsersFromLocalStorage(): UserDTO[] | null {
     const storedUsers = localStorage.getItem("userData");
     return storedUsers ? JSON.parse(storedUsers) : null;
+  }
+
+  getUserById(id: number): UserDTO {
+    const usersData = localStorage.getItem('userData');
+    const parsedUsersData = JSON.parse(usersData as string);
+    const selectedUser = parsedUsersData.find((user: any) => user.id === id ? user : null);
+    return selectedUser as UserDTO
   }
 
   deleteUser(): void {

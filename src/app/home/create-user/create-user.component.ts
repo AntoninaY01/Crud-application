@@ -34,17 +34,14 @@ export class CreateUserComponent implements OnInit {
   }
 
   createAndStoreNewUser(form: any): void {
-    this.generateNewUserId();
     const user = this.form.value;
     user.id = this.generateNewUserId();
     this.userActionService.createNewUser(user);
     this.goBack();
     console.log(user);
-    
   }
 
   generateNewUserId(): number {
-    debugger
     const existingUsers = this.userActionService.getUsersFromLocalStorage();
     if (existingUsers !== null) {
       return existingUsers.length + 1;
