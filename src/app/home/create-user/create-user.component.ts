@@ -38,7 +38,6 @@ export class CreateUserComponent implements OnInit {
     user.id = this.generateNewUserId();
     this.userActionService.createNewUser(user);
     this.goBack();
-    console.log(user);
   }
 
   generateNewUserId(): number {

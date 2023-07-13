@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {UserDTO} from "./model";
+import { Injectable } from "@angular/core";
+import { UserDTO } from "./model";
 
 
 @Injectable({providedIn: "root"})
@@ -30,8 +30,14 @@ export class UserActionsService {
     return selectedUser as UserDTO
   }
 
-  deleteUser(): void {
+  updateUserDataInLocalStorage(updatedUser: UserDTO, id: number): void {
+    const userList = this.getUsersFromLocalStorage();
+    const updatedUserIndex = userList?.findIndex(user => user.id === id) as number;
 
+    if (updatedUserIndex !== -1 && userList) {
+      userList[updatedUserIndex] = updatedUser;
+      localStorage.setItem('userData', JSON.stringify(userList));
+    }
   }
 
 }

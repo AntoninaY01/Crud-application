@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
       {field: 'city', header: 'City'},
       {field: 'address', header: 'Address'},
     ]
-    // console.log(this.usersList)
   }
 
   createUser(): void {
@@ -41,6 +40,11 @@ export class HomeComponent implements OnInit {
 
   onViewUser(id: number): void {
     this.router.navigate(['home/view-user', id])
+  }
+
+  onEditUser(id: number): void {
+    this.router.navigate(['home/update-user', id])
+
   }
 
 }
