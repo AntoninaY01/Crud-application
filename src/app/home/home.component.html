@@ -1,4 +1,4 @@
-<div class="table-wrapper h-full w-full">
+<div class="table-wrapper h-full w-full">  
   <div class="flex justify-content-center p-8">
     <p-table
       [columns]="cols"
@@ -28,11 +28,10 @@
           <td>
             <button type="button" pButton pRipple icon="pi pi-eye" class="mr-2" (click)="onViewUser(rowData.id)"></button>
             <button type="button" pButton pRipple icon="pi pi-pencil" class="mr-2" (click)="onEditUser(rowData.id)"></button>
-            <button type="button" pButton pRipple icon="pi pi-trash"></button>
+            <button type="button" pButton pRipple icon="pi pi-trash" (click)="onDeleteUser(rowData.id)"></button>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </div>
 </div>
-

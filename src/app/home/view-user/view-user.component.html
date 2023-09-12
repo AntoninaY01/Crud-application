@@ -3,14 +3,14 @@
     <div class="grid formgrid">
       <div class="p-fluid col-12">
         <div class="field">
-          <label for="firstname">Firstname</label>
+          <label for="firstname">{{ "user.firstname" | translate }}</label>
           <input id="firstname"
                  pInputText
                  formControlName="firstName"
                  readonly="firstName">
         </div>
         <div class="field">
-          <label for="lastname">Lastname</label>
+          <label for="lastname">{{ 'user.lastname' | translate }}</label>
           <input
             id="lastname"
             pInputText
@@ -19,7 +19,7 @@
         </div>
 
         <div class="field">
-          <label for="currentPosition">Current Position</label>
+          <label for="currentPosition">{{ 'user.current-position' | translate }}</label>
           <input
             id="currentPosition"
             pInputText
@@ -27,7 +27,7 @@
             readonly="currentPosition">
         </div>
         <div class="field">
-          <label for="age">Age</label>
+          <label for="age">{{ 'user.age' | translate }}</label>
           <input
             id="age"
             pInputText
@@ -35,7 +35,7 @@
             readonly="age">
         </div>
         <div class="field">
-          <label for="city">City</label>
+          <label for="city">{{ 'user.city' | translate }}</label>
           <input
             id="city"
             pInputText
@@ -43,7 +43,7 @@
             readonly="city">
         </div>
         <div class="field">
-          <label for="address">Address</label>
+          <label for="address">{{ 'user.address' | translate }}</label>
           <input
             id="address"
             pInputText
@@ -51,7 +51,7 @@
             readonly="address">
         </div>
         <div class="justify-content-between flex">
-          <p-button class="p-button-danger flex justify-content-end" (click)="goBack()">Back</p-button>
+          <p-button class="p-button-danger flex justify-content-end" (click)="goBack()">{{ 'user.back-button' | translate }}</p-button>
         </div>
 
       </div>

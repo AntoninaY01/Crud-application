@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
 import { UserDTO } from "./model";
+import { MessageService } from "primeng/api";
 
 
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: "root" })
 export class UserActionsService {
+
+  constructor(private messageService: MessageService) { }
 
   createNewUser(newUser: UserDTO): void {
     const existingUsers = this.getUsersFromLocalStorage();
@@ -20,16 +23,16 @@ export class UserActionsService {
 
   getUsersFromLocalStorage(): UserDTO[] | null {
     const storedUsers = localStorage.getItem("userData");
-    return storedUsers ? JSON.parse(storedUsers) : null;
+    return storedUsers ? JSON.parse(storedUsers) : this.showError();
   }
 
   getUserById(id: number): UserDTO {
-    const usersData = localStorage.getItem('userData');
-    const parsedUsersData = JSON.parse(usersData as string);
-    const selectedUser = parsedUsersData.find((user: any) => user.id === id ? user : null);
+    const usersData = this.getUsersFromLocalStorage()
+    const selectedUser = usersData?.find((user: any) => user.id === id ? user : null);
     return selectedUser as UserDTO
   }
 
+  //TODO THINK about promises, handle error
   updateUserDataInLocalStorage(updatedUser: UserDTO, id: number): void {
     const userList = this.getUsersFromLocalStorage();
     const updatedUserIndex = userList?.findIndex(user => user.id === id) as number;
@@ -40,4 +43,23 @@ export class UserActionsService {
     }
   }
 
+  deleteUserById(id: number): void {
+    const usersList = this.getUsersFromLocalStorage();
+    if (!usersList) {
+      return;
+    }
+    const updatedUserList = usersList.filter((user: UserDTO) => user.id !== id);
+
+    localStorage.setItem("userData", JSON.stringify(updatedUserList));
+    this.showSuccess()
+
+  }
+
+  showError(): void {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Fail' })
+  }
+
+  showSuccess(): void {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Success' })
+  }
 }

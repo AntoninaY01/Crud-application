@@ -1,0 +1,13 @@
+{
+    "user": {
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "current-position": "Current Position",
+        "age": "Age",
+        "city": "City",
+        "address": "Address",
+        "back-button": "Back",
+        "update-button": "Update",
+        "save-button": "Save"
+    }
+}

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
-import { UserDTO } from "../model";
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-user',
@@ -16,7 +17,9 @@ export class UpdateUserComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private userActionsService: UserActionsService,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -30,9 +33,11 @@ export class UpdateUserComponent implements OnInit {
 
     currentUserData = { ...currentUserData, ...updatedUserData };
 
-    this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId)
+    this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId);
+    this.userActionsService.showSuccess();
     this.goBack()
   }
+
   private showUserDataFromLocalStorage(): void {
     this.form = this.fb.group({
       firstName: [''],

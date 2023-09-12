@@ -47,4 +47,8 @@ export class HomeComponent implements OnInit {
 
   }
 
+  onDeleteUser(id: number): void {
+    this.userActionsService.deleteUserById(id);
+  }
+
 }
