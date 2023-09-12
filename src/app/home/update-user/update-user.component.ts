@@ -3,8 +3,6 @@ import { FormBuilder, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
 import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
-
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
@@ -18,7 +16,6 @@ export class UpdateUserComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private userActionsService: UserActionsService,
               private router: Router,
-              private messageService: MessageService,
               private translateService: TranslateService) {
   }
 

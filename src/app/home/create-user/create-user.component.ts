@@ -3,7 +3,6 @@ import { FormBuilder, UntypedFormGroup } from "@angular/forms";
 import { UserActionsService } from "../user-actions.service";
 import { Router } from "@angular/router";
 import { UserDTO } from '../model';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-user',
@@ -16,8 +15,7 @@ export class CreateUserComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private userActionService: UserActionsService,
-    private router: Router,
-    private messageService: MessageService) {
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -39,7 +37,7 @@ export class CreateUserComponent implements OnInit {
     const user = this.form.value;
     user.id = this.generateNewUserId();
     this.userActionService.createNewUser(user);
-    this.showSuccessMessage();
+    this.userActionService.showSuccess();
     this.goBack();
   }
 
@@ -49,10 +47,6 @@ export class CreateUserComponent implements OnInit {
       return existingUsers.length + 1;
     }
     return 1;
-  }
-
-  showSuccessMessage(): void {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Success' });
   }
 
   goBack(): void {
