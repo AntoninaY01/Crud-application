@@ -27,23 +27,31 @@ export class UserActionsService {
   }
 
   getUserById(id: number): UserDTO {
-    const usersData = this.getUsersFromLocalStorage()
+    const usersData = this.getUsersFromLocalStorage();
     const selectedUser = usersData?.find((user: any) => user.id === id ? user : null);
-    return selectedUser as UserDTO
+    return selectedUser as UserDTO;
   }
 
-  //TODO THINK about promises, handle error
-  updateUserDataInLocalStorage(updatedUser: UserDTO, id: number): void {
-    const userList = this.getUsersFromLocalStorage();
-    const updatedUserIndex = userList?.findIndex(user => user.id === id) as number;
-
-    if (updatedUserIndex !== -1 && userList) {
-      userList[updatedUserIndex] = updatedUser;
-      localStorage.setItem('userData', JSON.stringify(userList));
-    }
+  updateUserDataInLocalStorage(updatedUser: UserDTO, id: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        const userList = this.getUsersFromLocalStorage();
+        const updatedUserIndex = userList?.findIndex(user => user.id === id) as number;
+  
+        if (updatedUserIndex !== -1 && userList) {
+          userList[updatedUserIndex] = updatedUser;
+          localStorage.setItem('userData', JSON.stringify(userList));
+          resolve(); 
+        } else {
+          reject(new Error('User not found'));
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
-  deleteUserById(id: number): void {
+  deleteUserById(id: number): UserDTO[] | undefined {
     const usersList = this.getUsersFromLocalStorage();
     if (!usersList) {
       return;
@@ -51,15 +59,15 @@ export class UserActionsService {
     const updatedUserList = usersList.filter((user: UserDTO) => user.id !== id);
 
     localStorage.setItem("userData", JSON.stringify(updatedUserList));
-    this.showSuccess()
-
+    this.showSuccess();
+    return updatedUserList;
   }
 
   showError(): void {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Fail' })
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Fail' });
   }
 
   showSuccess(): void {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Success' })
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Success' });
   }
 }

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onUserCreated()
+    this.onUserCreated();
     this.cols = [
       {field: 'firstName', header: 'First Name'},
       {field: 'lastName', header: 'Last Name'},
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDeleteUser(id: number): void {
-    this.userActionsService.deleteUserById(id);
+    this.usersList = this.userActionsService.deleteUserById(id) as UserDTO[];
   }
 
 }

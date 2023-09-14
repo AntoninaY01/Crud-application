@@ -1,6 +1,6 @@
 <div class="table-wrapper h-full w-full">
   <div class="flex justify-content-center p-8">
-    <p-table [columns]="cols" [value]="usersList" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [columns]="cols" [value]="usersList" class="border-double border-blue-500 table">
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
           {{ 'user.table-title' | translate}}
@@ -12,7 +12,7 @@
           <th *ngFor="let col of columns">
             {{ col.header }}
           </th>
-          <th>
+          <th class="flex justify-content-center">
             {{ 'user.actions' | translate}}
           </th>
         </tr>

@@ -31,7 +31,7 @@ export class CreateUserComponent implements OnInit {
       age: [null, Validators.required],
       city: ['', Validators.required],
       address: ['', Validators.required],
-    })
+    });
   }
 
   createAndStoreNewUser(form: any): void {

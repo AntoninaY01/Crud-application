@@ -18,7 +18,7 @@ export class ViewUserComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.viewUser()
+    this.viewUser();
   }
 
   private viewUser(): void {
@@ -29,9 +29,9 @@ export class ViewUserComponent implements OnInit {
       age: [],
       city: [''],
       address: [''],
-    })
+    });
 
-    this.form.patchValue(this.userActionsService.getUserById(this.userId))
+    this.form.patchValue(this.userActionsService.getUserById(this.userId));
   }
 
   goBack(): void {

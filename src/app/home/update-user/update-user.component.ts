@@ -31,9 +31,15 @@ export class UpdateUserComponent implements OnInit {
 
       currentUserData = { ...currentUserData, ...updatedUserData };
 
-      this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId);
-      this.userActionsService.showSuccess();
-      this.goBack()
+      this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId)
+        .then(() => {
+          this.userActionsService.showSuccess();
+          this.goBack()
+        })
+        .catch(() => {
+          this.userActionsService.showError();
+        });
+
     } else {
       return;
     }
@@ -49,7 +55,7 @@ export class UpdateUserComponent implements OnInit {
       address: ['', Validators.required],
     })
 
-    this.form.patchValue(this.userActionsService.getUserById(this.userId))
+    this.form.patchValue(this.userActionsService.getUserById(this.userId));
   }
 
   goBack(): void {
