@@ -60,6 +60,6 @@ export class UserActionsService {
   }
 
   showSuccess(): void {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Success' })
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Success' })
   }
 }

@@ -8,6 +8,12 @@
         "address": "Address",
         "back-button": "Back",
         "update-button": "Update",
-        "save-button": "Save"
+        "save-button": "Save",
+        "validation": {
+            "required": "This field is required!"
+        },
+        "table-title": "Manage Users",
+        "actions": "Actions",
+        "add-users-button-text": "Add new User"
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup } from "@angular/forms";
+import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
 import { TranslateService } from '@ngx-translate/core';
@@ -13,10 +13,10 @@ export class UpdateUserComponent implements OnInit {
   userId!: number
 
   constructor(private fb: FormBuilder,
-              private activatedRoute: ActivatedRoute,
-              private userActionsService: UserActionsService,
-              private router: Router,
-              private translateService: TranslateService) {
+    private activatedRoute: ActivatedRoute,
+    private userActionsService: UserActionsService,
+    private router: Router,
+    private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -25,24 +25,28 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUserData(form: any): void {
-    const updatedUserData = this.form.value
-    let currentUserData = this.userActionsService.getUserById(this.userId);
+    if (this.form.valid) {
+      const updatedUserData = this.form.value;
+      let currentUserData = this.userActionsService.getUserById(this.userId);
 
-    currentUserData = { ...currentUserData, ...updatedUserData };
+      currentUserData = { ...currentUserData, ...updatedUserData };
 
-    this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId);
-    this.userActionsService.showSuccess();
-    this.goBack()
+      this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId);
+      this.userActionsService.showSuccess();
+      this.goBack()
+    } else {
+      return;
+    }
   }
 
   private showUserDataFromLocalStorage(): void {
     this.form = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      currentPosition: [''],
-      age: [],
-      city: [''],
-      address: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      currentPosition: ['', Validators.required],
+      age: [null, Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
     })
 
     this.form.patchValue(this.userActionsService.getUserById(this.userId))

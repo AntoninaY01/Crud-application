@@ -1,53 +1,59 @@
 <div class="form-wrapper flex justify-content-center p-5">
   <form [formGroup]="form" (ngSubmit)="updateUserData(this.form)">
-    <div class="grid formgrid">
+    <div class="grid">
       <div class="p-fluid col-12">
-        <div class="field">
+        <div class="field block">
           <label for="firstname">{{ "user.firstname" | translate }}</label>
-          <input id="firstname"
-                 pInputText
-                 formControlName="firstName">
+          <input id="firstname" pInputText formControlName="firstName">
+          <small class="text-red-500 block" *ngIf="form.controls['firstName'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
+
         </div>
-        <div class="field">
+        <div class="field block">
           <label for="lastname">{{ 'user.lastname' | translate }}</label>
-          <input
-            id="lastname"
-            pInputText
-            formControlName="lastName">
+          <input id="lastname" pInputText formControlName="lastName">
+          <small class="text-red-500 block" *ngIf="form.controls['lastName'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
         </div>
 
-        <div class="field">
+        <div class="field block">
           <label for="currentPosition">{{ 'user.current-position' | translate }}</label>
-          <input
-            id="currentPosition"
-            pInputText
-            formControlName="currentPosition">
+          <input id="currentPosition" pInputText formControlName="currentPosition">
+          <small class="text-red-500 block" *ngIf="form.controls['currentPosition'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
+
         </div>
-        <div class="field">
+        <div class="field block">
           <label for="age">{{ 'user.age' | translate }}</label>
-          <input
-            id="age"
-            pInputText
-            formControlName="age">
+          <input id="age" pInputText formControlName="age">
+          <small class="text-red-500 block" *ngIf="form.controls['age'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
+
         </div>
-        <div class="field">
+        <div class="field block">
           <label for="city">{{ 'user.city' | translate }}</label>
-          <input
-            id="city"
-            pInputText
-            formControlName="city">
+          <input id="city" pInputText formControlName="city">
+          <small class="text-red-500 block" *ngIf="form.controls['city'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
+
         </div>
-        <div class="field">
+        <div class="field block">
           <label for="address">{{ 'user.address' | translate }}</label>
-          <input
-            id="address"
-            pInputText
-            formControlName="address">
+          <input id="address" pInputText formControlName="address">
+          <small class="text-red-500 block" *ngIf="form.controls['address'].errors?.['required']">
+            {{ 'user.validation.required' | translate }}
+          </small>
         </div>
         <div class="justify-content-between flex">
-          <p-button class="p-button-danger flex justify-content-end" (click)="goBack()">{{ 'user.back-button' | translate }}</p-button>
-          <p-button type="submit" class="p-button-success flex justify-content-start"
-          >{{ 'user.update-button' | translate }}</p-button>
+          <p-button class="p-button-danger flex justify-content-end" (click)="goBack()">{{ 'user.back-button' |
+            translate }}</p-button>
+          <p-button type="submit" class="p-button-success flex justify-content-start">{{ 'user.update-button' |
+            translate }}</p-button>
         </div>
       </div>
     </div>

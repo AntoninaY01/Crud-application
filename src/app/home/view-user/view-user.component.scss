@@ -1,0 +1,16 @@
+:host ::ng-deep {
+    .field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  
+    .field > label {
+      width: 5rem;
+    }
+  
+    .p-inputtext {
+      width: 20rem;
+      margin-left: 1rem;
+    }
+  }

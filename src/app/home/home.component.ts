@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDTO } from "./model";
 import { Router } from "@angular/router";
 import { UserActionsService } from "./user-actions.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,11 @@ export class HomeComponent implements OnInit {
   usersList: UserDTO[] = [];
   cols!: { field: string, header: string }[];
 
-  constructor(private router: Router, private userActionsService: UserActionsService) {
+  constructor(
+    private router: Router, 
+    private userActionsService: UserActionsService,
+    private translateService: TranslateService
+    ) {
   }
 
   ngOnInit() {

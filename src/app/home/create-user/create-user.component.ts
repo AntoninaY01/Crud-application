@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup } from "@angular/forms";
+import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { UserActionsService } from "../user-actions.service";
 import { Router } from "@angular/router";
 import { UserDTO } from '../model';
@@ -12,6 +12,7 @@ import { UserDTO } from '../model';
 export class CreateUserComponent implements OnInit {
   form!: UntypedFormGroup;
   newUser!: UserDTO;
+  submitted = false;
 
   constructor(private fb: FormBuilder,
     private userActionService: UserActionsService,
@@ -24,21 +25,28 @@ export class CreateUserComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      currentPosition: [''],
-      age: [],
-      city: [''],
-      address: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      currentPosition: ['', Validators.required],
+      age: [null, Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
     })
   }
 
   createAndStoreNewUser(form: any): void {
-    const user = this.form.value;
-    user.id = this.generateNewUserId();
-    this.userActionService.createNewUser(user);
-    this.userActionService.showSuccess();
-    this.goBack();
+    this.submitted = true;
+
+    if (this.form.valid) {
+
+      const user = this.form.value;
+      user.id = this.generateNewUserId();
+      this.userActionService.createNewUser(user);
+      this.userActionService.showSuccess();
+      this.goBack();
+    } else {
+      return;
+    }
   }
 
   generateNewUserId(): number {
