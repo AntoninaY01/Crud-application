@@ -1,0 +1,15 @@
+<div class="form-wrapper p-5">
+  <div class="grid p-fluid">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label>E-mail</label>
+        <input pInputText formControlName="email">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input pInputText formControlName="password">
+      </div>
+      <button pButton [disabled]="form.invalid">Log In</button>
+    </form>
+  </div>
+</div>

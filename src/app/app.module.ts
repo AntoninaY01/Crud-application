@@ -10,16 +10,25 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from "./core/core.module";
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { InputTextModule } from "primeng/inputtext";
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    CoreModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -28,7 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       }
     }),
     AppRoutingModule,
-    ToastModule
+    ToastModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule
 
   ],
   providers: [MessageService],

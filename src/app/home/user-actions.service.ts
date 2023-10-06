@@ -23,7 +23,7 @@ export class UserActionsService {
 
   getUsersFromLocalStorage(): UserDTO[] | null {
     const storedUsers = localStorage.getItem("userData");
-    return storedUsers ? JSON.parse(storedUsers) : this.showError();
+    return storedUsers ? JSON.parse(storedUsers) : null;
   }
 
   getUserById(id: number): UserDTO {
