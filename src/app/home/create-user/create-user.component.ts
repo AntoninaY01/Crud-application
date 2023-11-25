@@ -36,14 +36,21 @@ export class CreateUserComponent implements OnInit {
 
   createAndStoreNewUser(form: any): void {
     this.submitted = true;
+    if(this.form.invalid){
+      return;
+    }
 
     if (this.form.valid) {
 
       const user = this.form.value;
       user.id = this.generateNewUserId();
-      this.userActionService.createNewUser(user);
-      this.userActionService.showSuccess();
-      this.goBack();
+      this.userActionService.createNewUser(user).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.userActionService.showSuccess();
+          this.goBack();
+        }
+      })
     } else {
       return;
     }

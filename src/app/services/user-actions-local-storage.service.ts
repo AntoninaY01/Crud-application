@@ -1,41 +1,31 @@
 import { Injectable } from "@angular/core";
-import { UserDTO } from "./model";
 import { MessageService } from "primeng/api";
-import { map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { UserDTO } from "../home/model";
 
 
 @Injectable({ providedIn: "root" })
-export class UserActionsService {
+export class UserActionsLocalStorageService {
 
   constructor(private messageService: MessageService, private http: HttpClient) {
   }
 
+  createNewUser(newUser: UserDTO): void {
+    const existingUsers = this.getUsersFromLocalStorage();
 
-  createNewUser(newUser: UserDTO): Observable<any> {
-    return this.http.post<{ message: string }>('http://localhost:3000/api/user', newUser);
+    let updatedUsers: UserDTO[] = [];
+
+    if (existingUsers) {
+      updatedUsers = existingUsers.concat(newUser); // Concatenate the new user to the existing user data
+    } else {
+      updatedUsers.push(newUser); // Create a new array with the new user
+    }
+    localStorage.setItem("userData", JSON.stringify(updatedUsers));
   }
 
   getUsersFromLocalStorage(): UserDTO[] | null {
     const storedUsers = localStorage.getItem("userData");
     return storedUsers ? JSON.parse(storedUsers) : null;
-  }
-
-  getUsers(): Observable<any> {
-    return this.http.get<{ message: string, userList: UserDTO[] }>('http://localhost:3000/api/users')
-        .pipe(map((userData: any) => {
-          return userData.userList.map((user: any) => {
-            return {
-              firstName: user.firstName,
-              lastName: user.lastName,
-              currentPosition: user.currentPosition,
-              age: user.age,
-              city: user.city,
-              address: user.address,
-              id: user._id
-            }
-          })
-        }))
   }
 
   getUserById(id: number): UserDTO {
@@ -63,15 +53,14 @@ export class UserActionsService {
     });
   }
 
-  deleteUserById(id: any): Observable<any> {
-    return this.http.delete(`http://localhost:3000/api/users/${id}`);
-  }
+  deleteUserById(id: number): UserDTO[] | undefined {
+    const usersList = this.getUsersFromLocalStorage();
+    if (!usersList) {
+      return;
+    }
+    const updatedUserList = usersList.filter((user: UserDTO) => user.id !== id);
 
-  showError(): void {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Fail' });
-  }
-
-  showSuccess(): void {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Success' });
+    localStorage.setItem("userData", JSON.stringify(updatedUserList));
+    return updatedUserList;
   }
 }

@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  usersList: UserDTO[] = [];
+  users: UserDTO[] = [];
   cols!: { field: string, header: string }[];
 
   constructor(
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onUserCreated();
+    this.getAllUsers();
     this.cols = [
       {field: 'firstName', header: 'First Name'},
       {field: 'lastName', header: 'Last Name'},
@@ -36,11 +36,20 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['home', 'create-user']);
   }
 
-  onUserCreated(): void {
-    const storedUsers = this.userActionsService.getUsersFromLocalStorage();
-    if (Array.isArray(storedUsers)) {
-      this.usersList.push(...storedUsers);
-    }
+  getAllUsers(): void {
+    this.userActionsService.getUsers().subscribe({
+      next: (users) => {
+        if (users) {
+          if (Array.isArray(users)) {
+            this.users.push(...users);
+          } else {
+            console.error('userListData.userList is not an array:', users);
+          }
+        } else {
+          console.error('Invalid userListData:', users);
+        }
+      }
+    })
   }
 
   onViewUser(id: number): void {
@@ -52,8 +61,13 @@ export class HomeComponent implements OnInit {
 
   }
 
-  onDeleteUser(id: number): void {
-    this.usersList = this.userActionsService.deleteUserById(id) as UserDTO[];
+  onDeleteUser(id: any): void {
+    this.userActionsService.deleteUserById(id).subscribe({
+      next: () => {
+        const updatedUsers = this.users.filter(user => user.id !== id);
+        this.users = updatedUsers;
+      }
+    });
   }
 
 }
