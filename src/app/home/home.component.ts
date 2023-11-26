@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
         } else {
           console.error('Invalid userListData:', users);
         }
+      }, error: (err) => {
+        console.log('eeeeerrorororo',err)
       }
     })
   }

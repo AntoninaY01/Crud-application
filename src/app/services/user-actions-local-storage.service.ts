@@ -63,4 +63,13 @@ export class UserActionsLocalStorageService {
     localStorage.setItem("userData", JSON.stringify(updatedUserList));
     return updatedUserList;
   }
+
+  // method used in a component for generating an id
+  // generateNewUserId(): number {
+  //     const existingUsers = this.userActionService.getUsersFromLocalStorage();
+  //     if (existingUsers !== null) {
+  //       return existingUsers.length + 1;
+  //     }
+  //     return 1;
+  //   }
 }

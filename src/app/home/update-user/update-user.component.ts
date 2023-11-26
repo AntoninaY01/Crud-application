@@ -3,6 +3,7 @@ import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
 import { TranslateService } from '@ngx-translate/core';
+import { UserDTO } from "../model";
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
@@ -20,32 +21,37 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.showUserDataFromLocalStorage();
+    this.userId = this.activatedRoute.snapshot.paramMap.get('id') as any;
+    this.populateUserData();
   }
 
   updateUserData(form: any): void {
+    let currentUserData: UserDTO;
     if (this.form.valid) {
       const updatedUserData = this.form.value;
-      let currentUserData = this.userActionsService.getUserById(this.userId);
+      this.userActionsService.getUserById(this.userId).subscribe({
+        next: (res => {
+          currentUserData = res as UserDTO;
+          currentUserData = { ...currentUserData, ...updatedUserData };
 
-      currentUserData = { ...currentUserData, ...updatedUserData };
-
-      this.userActionsService.updateUserDataInLocalStorage(currentUserData, this.userId)
-        .then(() => {
-          this.userActionsService.showSuccess();
-          this.goBack()
+          this.userActionsService.updateUserData(currentUserData, this.userId).subscribe({
+            next: (res) => {
+              console.log(res);
+              this.userActionsService.showSuccess();
+              this.goBack();
+            }, error: () => {
+              this.userActionsService.showError();
+            }
+          })
         })
-        .catch(() => {
-          this.userActionsService.showError();
-        });
+      })
 
     } else {
       return;
     }
   }
 
-  private showUserDataFromLocalStorage(): void {
+  private populateUserData(): void {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -55,8 +61,11 @@ export class UpdateUserComponent implements OnInit {
       address: ['', Validators.required],
     })
 
-    this.form.patchValue(this.userActionsService.getUserById(this.userId));
-  }
+    this.userActionsService.getUserById(this.userId).subscribe({
+      next: (res) => {
+        this.form.patchValue(res as UserDTO);
+      }
+    })  }
 
   goBack(): void {
     this.router.navigate(['home']);

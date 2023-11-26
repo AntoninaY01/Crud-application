@@ -3,6 +3,7 @@ import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { UserActionsService } from "../user-actions.service";
 import { Router } from "@angular/router";
 import { UserDTO } from '../model';
+import { response } from "express";
 
 @Component({
   selector: 'app-create-user',
@@ -43,7 +44,6 @@ export class CreateUserComponent implements OnInit {
     if (this.form.valid) {
 
       const user = this.form.value;
-      user.id = this.generateNewUserId();
       this.userActionService.createNewUser(user).subscribe({
         next: (res) => {
           console.log(res);
@@ -56,13 +56,6 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-  generateNewUserId(): number {
-    const existingUsers = this.userActionService.getUsersFromLocalStorage();
-    if (existingUsers !== null) {
-      return existingUsers.length + 1;
-    }
-    return 1;
-  }
 
   goBack(): void {
     this.router.navigate(['home']);
