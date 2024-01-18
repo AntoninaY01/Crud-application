@@ -1,0 +1,61 @@
+<div class="form-wrapper flex justify-content-center p-5">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="grid">
+      <div class="p-fluid col-12">
+        <div class="field block">
+          <label for="eventType">Event Type</label>
+          <p-dropdown id="eventType" [options]="eventTypeOptions" optionLabel="name" formControlName="eventType"></p-dropdown>
+          <small class="text-red-500 block" *ngIf="form.controls['eventType'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}</small>
+        </div>
+        <div class="field block">
+          <label for="eventName">Event Name</label>
+          <input id="eventName" pInputText formControlName="eventName">
+          <small class="text-red-500 block" *ngIf="form.controls['eventName'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}
+          </small>
+
+        </div>
+
+        <div class="field block">
+          <label for="guestsAmount">Amount of Guests</label>
+          <p-dropdown id="guestsAmount" [options]="eventGuestsAmountOptions" optionLabel="name" formControlName="guestsAmount"></p-dropdown>
+          <small class="text-red-500 block" *ngIf="form.controls['guestsAmount'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}</small>
+
+        </div>
+
+        <div class="field block">
+          <label for="date">Date</label>
+          <input id="date" pInputText formControlName="date">
+          <small class="text-red-500 block" *ngIf="form.controls['date'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}</small>
+
+        </div>
+        <div class="field block">
+          <label for="address">Address</label>
+          <input id="address" pInputText formControlName="address">
+          <small class="text-red-500 block" *ngIf="form.controls['address'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}</small>
+
+        </div>
+        <div class="field block">
+          <label for="dresscode">Dresscode</label>
+          <input id="dresscode" pInputText formControlName="dresscode">
+          <small class="text-red-500 block" *ngIf="form.controls['dresscode'].errors?.['required'] && submitted">
+            {{ 'user.validation.required' | translate }}</small>
+
+        </div>
+        <div class="justify-content-between flex">
+          <p-button class="p-button-danger flex justify-content-end">{{ 'user.back-button' |
+              translate }}</p-button>
+          <p-button type="submit" class="p-button-success flex justify-content-start">{{ 'user.save-button' | translate
+            }}</p-button>
+
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</div>

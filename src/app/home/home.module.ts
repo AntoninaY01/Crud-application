@@ -12,18 +12,21 @@ import { InputTextModule } from "primeng/inputtext";
 import { ViewUserComponent } from "./view-user/view-user.component";
 import { UpdateUserComponent } from "./update-user/update-user.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { CreateEventComponent } from './create-event/create-event.component';
+import { DropdownModule } from "primeng/dropdown";
 
 @NgModule({
-  declarations: [HomeComponent, CreateUserComponent, ViewUserComponent, UpdateUserComponent],
+  declarations: [HomeComponent, CreateUserComponent, ViewUserComponent, UpdateUserComponent, CreateEventComponent],
   imports: [
-    RouterModule.forChild(HOME_ROUTES), 
-    TableModule, 
-    CommonModule, 
-    ButtonModule, 
-    RippleModule, 
-    ReactiveFormsModule, 
-    InputTextModule, 
-    TranslateModule
+    RouterModule.forChild(HOME_ROUTES),
+    TableModule,
+    CommonModule,
+    ButtonModule,
+    RippleModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    TranslateModule,
+    DropdownModule
   ],
   providers: [],
 })

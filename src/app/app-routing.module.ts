@@ -18,7 +18,11 @@ const MAIN_ROUTES: Routes = [
     path: 'home',
     canActivate: [AuthGuard],
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  }]
+  },{
+    path: 'events',
+    loadChildren: () => import('./events/events.module').then(m => m.EventsModule)
+  }
+]
 
 @NgModule({
   imports: [

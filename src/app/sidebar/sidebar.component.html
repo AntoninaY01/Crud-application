@@ -1,0 +1,20 @@
+<p-sidebar
+  [visible]="true"
+  [closeOnEscape]="true"
+  [modal]="false"
+  [autoZIndex]="true"
+  [fullScreen]="false"
+  [showCloseIcon]="false"
+  styleClass="w-14rem">
+
+  <ng-template pTemplate="header">
+    <div class="text-2xl">Hello there</div>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <p-panelMenu [model]="sidebarMenu"
+                 styleClass="no-scroll"
+                 [multiple]="false">
+    </p-panelMenu>
+  </ng-template>
+</p-sidebar>

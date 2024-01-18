@@ -16,12 +16,19 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarModule } from "primeng/sidebar";
+import { PanelMenuModule } from "primeng/panelmenu";
+import { EventsComponent } from './events/events.component';
+import { CalendarModule } from "primeng/calendar";
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    SidebarComponent,
+    EventsComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +47,10 @@ import { ButtonModule } from "primeng/button";
     ToastModule,
     ReactiveFormsModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    SidebarModule,
+    PanelMenuModule,
+    CalendarModule
 
   ],
   providers: [MessageService],

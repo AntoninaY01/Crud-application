@@ -2,10 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose').default;
 const usersRoutes = require("./routes/users");
+const eventsRoutes = require("./routes/events")
 
 
 const app = express();
-// TODO: check the save method
 mongoose.connect("mongodb://localhost:27017/users").then(
     () => {
         console.log('conneceted to database')
@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api', usersRoutes);
+app.use('/api', eventsRoutes)
 
 module.exports = app;
 

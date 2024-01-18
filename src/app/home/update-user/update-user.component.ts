@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
 import { TranslateService } from '@ngx-translate/core';
 import { UserDTO } from "../model";
+
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
@@ -14,10 +15,10 @@ export class UpdateUserComponent implements OnInit {
   userId!: number
 
   constructor(private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private userActionsService: UserActionsService,
-    private router: Router,
-    private translateService: TranslateService) {
+              private activatedRoute: ActivatedRoute,
+              private userActionsService: UserActionsService,
+              private router: Router,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class UpdateUserComponent implements OnInit {
     this.populateUserData();
   }
 
+// to remove the get call, pass the form
   updateUserData(form: any): void {
     let currentUserData: UserDTO;
     if (this.form.valid) {
@@ -70,4 +72,5 @@ export class UpdateUserComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['home']);
   }
+
 }

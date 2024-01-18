@@ -42,7 +42,7 @@ router.put("/user/:id", (req, res, next) => {
     })
     User.updateOne( {_id: req.body.id}, user).then(result => {
         console.log(result);
-        res.status(200).json({message: "Updated user"});
+        res.status(200).json({message: "Updated user", user: user});
     })
 })
 

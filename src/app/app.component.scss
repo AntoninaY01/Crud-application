@@ -2,3 +2,10 @@
   background: #3d63de;
   color: white;
 }
+
+.app-content {
+
+  @media (min-width: 400px) {
+    margin-left: 200px;
+  }
+}
