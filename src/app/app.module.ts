@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from "./core/core.module";
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -50,7 +50,8 @@ import { CalendarModule } from "primeng/calendar";
     ButtonModule,
     SidebarModule,
     PanelMenuModule,
-    CalendarModule
+    CalendarModule,
+    FormsModule
 
   ],
   providers: [MessageService],

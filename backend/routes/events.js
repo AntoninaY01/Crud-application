@@ -14,21 +14,28 @@ router.post('/event', (req, res, next) => {
         dresscode: req.body.dresscode,
         id: req.body.id
     });
-    event.save();
-    res.status(201).json({
-        message: 'Event added successfully!'
-    });
+    event.save()
+     .then(result => {
+         res.status(200).json({ message: 'Event added successfully!', event: event });
+         console.log('Event saved:', result);
+    })
+        .catch(error => {
+            console.error('Error saving event:', error);
+        });
+    // res.status(201).json({
+    //     message: 'Event added successfully!'
+    // });
 })
-// router.get("/users", (req, res, next) => {
-//     User.find()
-//         .then(documents => {
-//             console.log(documents);
-//             res.status(200).json({
-//                 message: 'Posts fetched successfully!',
-//                 userList: documents
-//             })
-//         });
-// });
+router.get("/event", (req, res, next) => {
+    Event.find()
+        .then(events => {
+            console.log(events);
+            res.status(200).json({
+                message: 'Posts fetched successfully!',
+                eventList: events
+            })
+        });
+});
 
 // router.put("/user/:id", (req, res, next) => {
 //     const user = new User({

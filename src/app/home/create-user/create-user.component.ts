@@ -3,7 +3,6 @@ import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { UserActionsService } from "../user-actions.service";
 import { Router } from "@angular/router";
 import { UserDTO } from '../model';
-import { response } from "express";
 
 @Component({
   selector: 'app-create-user',
@@ -45,8 +44,7 @@ export class CreateUserComponent implements OnInit {
 
       const user = this.form.value;
       this.userActionService.createNewUser(user).subscribe({
-        next: (res) => {
-          console.log(res);
+        next: () => {
           this.userActionService.showSuccess();
           this.goBack();
         }

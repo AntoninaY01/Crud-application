@@ -4,7 +4,13 @@
       <div class="p-fluid col-12">
         <div class="field block">
           <label for="eventType">Event Type</label>
-          <p-dropdown id="eventType" [options]="eventTypeOptions" optionLabel="name" formControlName="eventType"></p-dropdown>
+          <p-dropdown id="eventType"
+                      [options]="eventTypeOptions"
+                      placeholder="Select"
+                      optionLabel="name"
+                      optionValue="code"
+                      formControlName="eventType">
+          </p-dropdown>
           <small class="text-red-500 block" *ngIf="form.controls['eventType'].errors?.['required'] && submitted">
             {{ 'user.validation.required' | translate }}</small>
         </div>
@@ -19,7 +25,13 @@
 
         <div class="field block">
           <label for="guestsAmount">Amount of Guests</label>
-          <p-dropdown id="guestsAmount" [options]="eventGuestsAmountOptions" optionLabel="name" formControlName="guestsAmount"></p-dropdown>
+          <p-dropdown id="guestsAmount"
+                      [options]="eventGuestsAmountOptions"
+                      placeholder="Select"
+                      optionLabel="name"
+                      optionValue="code"
+                      formControlName="guestsAmount">
+          </p-dropdown>
           <small class="text-red-500 block" *ngIf="form.controls['guestsAmount'].errors?.['required'] && submitted">
             {{ 'user.validation.required' | translate }}</small>
 
@@ -27,7 +39,7 @@
 
         <div class="field block">
           <label for="date">Date</label>
-          <input id="date" pInputText formControlName="date">
+          <p-calendar id="date" formControlName="date"></p-calendar>
           <small class="text-red-500 block" *ngIf="form.controls['date'].errors?.['required'] && submitted">
             {{ 'user.validation.required' | translate }}</small>
 
@@ -47,10 +59,10 @@
 
         </div>
         <div class="justify-content-between flex">
-          <p-button class="p-button-danger flex justify-content-end">{{ 'user.back-button' |
-              translate }}</p-button>
-          <p-button type="submit" class="p-button-success flex justify-content-start">{{ 'user.save-button' | translate
-            }}</p-button>
+          <p-button class="p-button-danger flex justify-content-end">
+            {{ 'user.back-button' | translate }}</p-button>
+          <p-button type="submit" class="p-button-success flex justify-content-start">
+            {{ 'user.save-button' | translate }}</p-button>
 
         </div>
 

@@ -1,8 +1,22 @@
-<div class="form-wrapper flex justify-content-center p-5">
+<div *ngIf="isFormReady" [formGroup]="form" class="form-wrapper flex justify-content-center p-5">
   <p-calendar
+          #calendar
           class="max-w-full"
           [inline]="true"
-          [showWeek]="true">
+          [showWeek]="true"
+          formControlName="reservedDates"
+          (onSelect)="onSelect($event)">
+
+    <ng-template pTemplate="date" let-date>
+      <div *ngIf="isDateBusy(date);then highlightedDate else normalDate"> {{date}}</div>
+      <ng-template #highlightedDate>
+        <span [ngClass]="{'busy-day-coloring': isDateBusy(date)}">{{date.day}}</span>
+      </ng-template>
+      <ng-template #normalDate>
+        <span [ngStyle]="{backgroundColor: 'inherit'}" style="border-radius:100%">{{date.day}}</span>
+      </ng-template>
+
+    </ng-template>
   </p-calendar>
 
 </div>

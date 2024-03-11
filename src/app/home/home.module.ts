@@ -14,6 +14,7 @@ import { UpdateUserComponent } from "./update-user/update-user.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { CreateEventComponent } from './create-event/create-event.component';
 import { DropdownModule } from "primeng/dropdown";
+import { CalendarModule } from "primeng/calendar";
 
 @NgModule({
   declarations: [HomeComponent, CreateUserComponent, ViewUserComponent, UpdateUserComponent, CreateEventComponent],
@@ -26,7 +27,8 @@ import { DropdownModule } from "primeng/dropdown";
     ReactiveFormsModule,
     InputTextModule,
     TranslateModule,
-    DropdownModule
+    DropdownModule,
+    CalendarModule
   ],
   providers: [],
 })

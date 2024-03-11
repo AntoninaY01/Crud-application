@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserDTO } from "./model";
 import { Router } from "@angular/router";
 import { UserActionsService } from "./user-actions.service";
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +15,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router, 
     private userActionsService: UserActionsService,
-    private translateService: TranslateService
     ) {
   }
 
@@ -58,16 +56,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['home/view-user', id])
   }
 
-  onEditUser(id: number): void {
-    this.router.navigate(['home/update-user', id])
-
+  onEditUser(userData: UserDTO): void {
+    this.router.navigate(['home/update-user', userData.id],{ state: { userData }})
   }
 
   onDeleteUser(id: any): void {
     this.userActionsService.deleteUserById(id).subscribe({
       next: () => {
-        const updatedUsers = this.users.filter(user => user.id !== id);
-        this.users = updatedUsers;
+        this.users = this.users.filter(user => user.id !== id);
       }
     });
   }

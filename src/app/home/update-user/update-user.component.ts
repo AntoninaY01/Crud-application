@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserActionsService } from "../user-actions.service";
-import { TranslateService } from '@ngx-translate/core';
 import { UserDTO } from "../model";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-user',
@@ -11,49 +11,37 @@ import { UserDTO } from "../model";
   styleUrls: ['./update-user.component.scss']
 })
 export class UpdateUserComponent implements OnInit {
+  private location: Location = inject(Location);
+
   form!: UntypedFormGroup
   userId!: number
+  state!: any;
 
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private userActionsService: UserActionsService,
-              private router: Router,
-              private translateService: TranslateService) {
+              private router: Router) {
   }
 
   ngOnInit() {
+    this.state = this.location.getState() as {userData: object};
     this.userId = this.activatedRoute.snapshot.paramMap.get('id') as any;
-    this.populateUserData();
+    this.populateUserData(this.state);
   }
 
-// to remove the get call, pass the form
   updateUserData(form: any): void {
-    let currentUserData: UserDTO;
-    if (this.form.valid) {
-      const updatedUserData = this.form.value;
-      this.userActionsService.getUserById(this.userId).subscribe({
-        next: (res => {
-          currentUserData = res as UserDTO;
-          currentUserData = { ...currentUserData, ...updatedUserData };
-
-          this.userActionsService.updateUserData(currentUserData, this.userId).subscribe({
-            next: (res) => {
-              console.log(res);
+    this.userActionsService.updateUserData(form.value, this.userId).subscribe({
+            next: () => {
               this.userActionsService.showSuccess();
               this.goBack();
             }, error: () => {
               this.userActionsService.showError();
             }
           })
-        })
-      })
-
-    } else {
-      return;
-    }
   }
 
-  private populateUserData(): void {
+
+  private populateUserData(form: any): void {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -67,7 +55,8 @@ export class UpdateUserComponent implements OnInit {
       next: (res) => {
         this.form.patchValue(res as UserDTO);
       }
-    })  }
+    })
+  }
 
   goBack(): void {
     this.router.navigate(['home']);
